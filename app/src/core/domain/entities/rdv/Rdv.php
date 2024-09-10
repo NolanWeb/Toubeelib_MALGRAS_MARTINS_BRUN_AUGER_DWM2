@@ -43,6 +43,8 @@ class Rdv extends Entity
         $this->specialite = $specialite;
     }
 
+    //a voir si on fusionne en 1fonction boolean 
+    //ou application de string pour status
     public function honorerRDV ()
     {
         $this->statut = "honoré";
