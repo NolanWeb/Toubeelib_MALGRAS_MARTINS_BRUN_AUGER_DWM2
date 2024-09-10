@@ -30,7 +30,7 @@ services:
       - '5432:5432'
     networks:
       - toubeelib.net
-    volumes:
+    volumes: 
       - ./app/sql:/var/sql'
   #
   # service administration des bases sql
