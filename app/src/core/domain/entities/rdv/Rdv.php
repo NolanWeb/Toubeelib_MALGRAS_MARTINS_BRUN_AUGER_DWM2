@@ -10,6 +10,7 @@ use toubeelib\core\dto\rdv\RdvDTO;
 
 class Rdv extends Entity
 {
+    protected ?string $ID;
     protected DateTimeImmutable $date;
     protected int $duree;
     protected Praticien $praticien;
@@ -24,6 +25,8 @@ class Rdv extends Entity
         $this->patient = $patient;
         $this->statut = $statut;
     }
+
+
 
     public function toDTO(): RdvDTO
     {
