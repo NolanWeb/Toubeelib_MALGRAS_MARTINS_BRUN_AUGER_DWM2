@@ -1,6 +1,6 @@
 <?php
 
-namespace toubeelib\core\dto;
+namespace toubeelib\core\dto\patient;
 
 use toubeelib\core\domain\entities\patient\Patient;
 use toubeelib\core\dto\DTO;
@@ -25,6 +25,41 @@ class PatientDTO extends DTO
         $this->tel = $p->tel;
         $this->mail = $p->mail;
         $this->dossierMedical = $p->dossierMedical;
+    }
+
+    public function getID(): string
+    {
+        return $this->ID;
+    }
+
+    public function getNom(): string
+    {
+        return $this->nom;
+    }
+
+    public function getPrenom(): string
+    {
+        return $this->prenom;
+    }
+
+    public function getAdresse(): string
+    {
+        return $this->adresse;
+    }
+
+    public function getTel(): string
+    {
+        return $this->tel;
+    }
+
+    public function getMail(): string
+    {
+        return $this->mail;
+    }
+
+    public function getDossierMedical(): string
+    {
+        return $this->dossierMedical;
     }
 
 

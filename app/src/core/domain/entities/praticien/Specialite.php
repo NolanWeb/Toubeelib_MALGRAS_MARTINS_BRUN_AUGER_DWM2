@@ -3,7 +3,7 @@
 namespace toubeelib\core\domain\entities\praticien;
 
 use toubeelib\core\domain\entities\Entity;
-use toubeelib\core\dto\SpecialiteDTO;
+use toubeelib\core\dto\practicien\SpecialiteDTO;
 
 class Specialite extends Entity
 {

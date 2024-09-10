@@ -3,7 +3,7 @@
 namespace toubeelib\core\domain\entities\patient;
 
 use toubeelib\core\domain\entities\Entity;
-use toubeelib\core\dto\PatientDTO;
+use toubeelib\core\dto\patient\PatientDTO;
 
 class Patient extends Entity
 {

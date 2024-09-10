@@ -1,6 +1,6 @@
 <?php
 
-namespace toubeelib\core\dto;
+namespace toubeelib\core\dto\rdv;
 
 use DateTimeImmutable;
 use toubeelib\core\domain\entities\patient\Patient;
