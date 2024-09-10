@@ -27,7 +27,6 @@ class Rdv extends Entity
     }
 
 
-
     public function toDTO(): RdvDTO
     {
         return new RdvDTO($this);
