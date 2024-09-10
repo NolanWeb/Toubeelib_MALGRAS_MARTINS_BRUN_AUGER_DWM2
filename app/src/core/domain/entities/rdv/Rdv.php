@@ -15,17 +15,51 @@ class Rdv extends Entity
     protected int $duree;
     protected Praticien $praticien;
     protected Patient $patient;
+    protected string $specialite;
     protected string $statut;
 
-    public function __construct(DateTimeImmutable $date, int $duree, Praticien $praticien, Patient $patient, string $statut)
+    public function __construct(DateTimeImmutable $date, int $duree, Praticien $praticien, Patient $patient, string $specialite)
     {
         $this->date = $date;
         $this->duree = $duree;
         $this->praticien = $praticien;
         $this->patient = $patient;
-        $this->statut = $statut;
+        $this->specialite = $specialite;
+        $this->statut = "prévu";
     }
 
+    public function annulerRDV ()
+    {
+        $this->statut = "annulé";
+    }
+
+    public function modifierPatientRDV (Patient $patient)
+    {
+        $this->patient = $patient;
+    }
+
+    public function modifierSpecialite($specialite)
+    {
+        $this->specialite = $specialite;
+    }
+
+    public function honorerRDV ()
+    {
+        $this->statut = "honoré";
+    }
+    public function payerRDV ()
+    {
+        $this->statut = "payé";
+    }
+    public function nePasHonorerRDV ()
+    {
+        $this->statut = "non honoré";
+    }
+
+    public function getID(): ?string
+    {
+        return $this->ID;
+    }
 
     public function toDTO(): RdvDTO
     {
