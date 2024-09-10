@@ -6,7 +6,7 @@ use DateTimeImmutable;
 use toubeelib\core\domain\entities\Entity;
 use toubeelib\core\domain\entities\patient\Patient;
 use toubeelib\core\domain\entities\praticien\Praticien;
-use toubeelib\core\dto\RdvDTO;
+use toubeelib\core\dto\rdv\RdvDTO;
 
 class Rdv extends Entity
 {

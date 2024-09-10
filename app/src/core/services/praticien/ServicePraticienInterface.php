@@ -2,9 +2,9 @@
 
 namespace toubeelib\core\services\praticien;
 
-use toubeelib\core\dto\InputPraticienDTO;
-use toubeelib\core\dto\PraticienDTO;
-use toubeelib\core\dto\SpecialiteDTO;
+use toubeelib\core\dto\practicien\InputPraticienDTO;
+use toubeelib\core\dto\practicien\PraticienDTO;
+use toubeelib\core\dto\practicien\SpecialiteDTO;
 
 interface ServicePraticienInterface
 {
