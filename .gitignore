@@ -1,6 +1,18 @@
-.idea
-.env
-*.class
-*.jar
-*.iml
-*.xml
+.idea/
+# IDE
+.vscode/
+.DS_STORE
+/coverage/
+# Vendor
+/vendor/
+# Logs
+/app/logs/*
+!/app/logs/README.md
+# Cache
+/var/cache/*
+.phpunit.result.cache
+cache.properties
+.php_cs.cache
+# Composer
+composer.phar
+composer.lock
