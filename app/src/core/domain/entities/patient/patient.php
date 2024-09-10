@@ -7,6 +7,7 @@ use toubeelib\core\dto\PatientDTO;
 
 class Patient extends Entity
 {
+    protected string $ID;
     protected string $nom;
     protected string $prenom;
     protected string $adresse;
@@ -17,6 +18,7 @@ class Patient extends Entity
     
     public function __construct(string $nom, string $prenom, string $adresse, string $tel)
     {
+        $this->ID = $ID;
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->adresse = $adresse;
