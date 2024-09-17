@@ -4,38 +4,37 @@ namespace toubeelib\application\actions;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Slim\Exception\HttpNotFoundException;
+use Slim\Routing\RouteContext;
 use toubeelib\application\renderer\JsonRenderer;
+use toubeelib\core\services\rdv\ServiceRdvInterface;
+use toubeelib\core\services\rdv\ServiceRdvInvalidDataException;
 use toubeelib\infrastructure\repositories\ArrayRdvRepository;
 
 class GetRdvAction extends AbstractAction
 {
-    private ArrayRdvRepository $rdvRepository;
-    private JsonRenderer $renderer;
+    protected ServiceRdvInterface $serviceRdv;
 
-    public function __construct(ArrayRdvRepository $rdvRepository, JsonRenderer $renderer)
+    public function __construct(ServiceRdvInterface $serviceRdv)
     {
-        $this->rdvRepository = $rdvRepository;
-        $this->renderer = $renderer;
+        $this->serviceRdv = $serviceRdv;
     }
 
-
-    public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $rdv = $this->rdvRepository->getRdvById($args['id']);
-        if (is_null($rdv)) {
-            return $this->renderer->render($rs, 404, ['error' => 'Rendez-vous not found']);
+        try {
+            $rdv_dto = $this->serviceRdv->consultRdv((int)$args['id']);
+        } catch (ServiceRdvInvalidDataException $e) {
+            throw new HttpNotFoundException($request, $e->getMessage());
         }
-
+        $routeParser = RouteContext::fromRequest($request)->getRouteParser();
         $data = [
-            'id' => $rdv->getId(),
-            'date' => $rdv->getDate(),
+            'rdv' => $rdv_dto,
             'links' => [
-                'self' => '/rdvs/' . $rdv->getId(),
-                'praticien' => '/praticiens/' . $rdv->getPraticienId(),
-                'patient' => '/patients/' . $rdv->getPatientId(),
-            ],
+                'self' => ['href' => $routeParser->urlFor('getRdv', ['id' => $rdv_dto->ID])],
+                'update' => ['href' => $routeParser->urlFor('updateRdv', ['id' => $rdv_dto->ID])]
+            ]
         ];
-
-        return $this->renderer->render($rs, 200, $data);
+        return JsonRenderer::render($response, 200, $data);
     }
 }
