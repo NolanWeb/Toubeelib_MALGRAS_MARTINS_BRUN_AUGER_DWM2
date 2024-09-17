@@ -5,6 +5,7 @@ namespace toubeelib\core\services\rdv;
 use toubeelib\core\dto\rdv\RdvDTO;
 use toubeelib\core\services\praticien\ServicePraticienInterface;
 use toubeelib\core\repositoryInterfaces\RdvRepositoryInterfaces;
+use toubeelib\core\repositoryInterfaces\RepositoryEntityNotFoundException;
 
 class ServiceRdv implements ServiceRdvInterface
 {
@@ -20,17 +21,16 @@ class ServiceRdv implements ServiceRdvInterface
     /**
      * @throws ServiceRdvInvalidDataException
      */
-    public function consulterRdv(int $rdvID): RdvDTO
+    public function consultRdv(int $rdvID): RdvDTO
     {
         try {
-            $rdvID = $this->rdvRepository->consulterRdv($rdvID);
-        } catch (ServiceRdvInvalidDataException $e) {
+            $rdv = $this->rdvRepository->getRdvById($rdvID);
+        } catch (RepositoryEntityNotFoundException $e) {
             throw new ServiceRdvInvalidDataException('Invalid Rdv ID');
         }
 
-        $praticien = $this->praticienService->getPraticienById($rdvID->getPraticienId());
+        $praticien = $this->praticienService->getPraticienById($rdv->getPraticienId());
 
-        return new RdvDTO($rdvID, $praticien);
-
+        return new RdvDTO($rdv, $praticien);
     }
 }
