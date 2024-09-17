@@ -20,10 +20,10 @@ class ServiceRdv implements ServiceRdvInterface
     /**
      * @throws ServiceRdvInvalidDataException
      */
-    public function consultRdv(int $rdvID): RdvDTO
+    public function consulterRdv(int $rdvID): RdvDTO
     {
         try {
-            $rdvID = $this->rdvRepository->consultRdv($rdvID);
+            $rdvID = $this->rdvRepository->consulterRdv($rdvID);
         } catch (ServiceRdvInvalidDataException $e) {
             throw new ServiceRdvInvalidDataException('Invalid Rdv ID');
         }
