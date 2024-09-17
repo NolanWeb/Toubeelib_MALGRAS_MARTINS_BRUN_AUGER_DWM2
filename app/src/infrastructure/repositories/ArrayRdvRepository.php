@@ -54,4 +54,12 @@ class ArrayRdvRepository implements RdvRepositoryInterfaces
         }
         unset($this->rdvs[$id]);
     }
+
+    public function consultRdv(string $id): Rdv
+    {
+        if (!isset($this->rdvs[$id])) {
+            throw new RepositoryEntityNotFoundException("Rendez-vous not found");
+        }
+        return $this->rdvs[$id];
+    }
 }
