@@ -61,6 +61,36 @@ class Rdv extends Entity
         return $this->ID;
     }
 
+    public function getDate(): DateTimeImmutable
+    {
+        return $this->date;
+    }
+
+    public function getDuree(): int
+    {
+        return $this->duree;
+    }
+
+    public function getPraticien(): Praticien
+    {
+        return $this->praticien;
+    }
+
+    public function getPatient(): Patient
+    {
+        return $this->patient;
+    }
+
+    public function getSpecialite(): string
+    {
+        return $this->specialite;
+    }
+
+    public function getStatut(): string
+    {
+        return $this->statut;
+    }
+
     public function toDTO(): RdvDTO
     {
         return new RdvDTO($this);

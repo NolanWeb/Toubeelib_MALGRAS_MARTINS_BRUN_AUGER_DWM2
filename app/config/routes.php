@@ -8,7 +8,7 @@ return function( \Slim\App $app):\Slim\App {
 
     $app->get('/',
         \toubeelib\application\actions\HomeAction::class);
-    $app->get('/rdv/{id}',
+    $app->get('/rdvs/{id}',
         \toubeelib\application\actions\GetRdvAction::class);
     $app->post('/rdv/create',
         \toubeelib\application\actions\CreateRdvAction::class);
