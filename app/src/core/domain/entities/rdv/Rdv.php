@@ -71,14 +71,14 @@ class Rdv extends Entity
         return $this->duree;
     }
 
-    public function getPraticien(): Praticien
+    public function getPraticienId(): string
     {
-        return $this->praticien;
+        return $this->praticien->getID();
     }
 
-    public function getPatient(): Patient
+    public function getPatientId(): string
     {
-        return $this->patient;
+        return $this->patient->getID();
     }
 
     public function getSpecialite(): string
