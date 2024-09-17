@@ -18,6 +18,7 @@ class GetRdvAction extends AbstractAction
         $this->renderer = $renderer;
     }
 
+
     public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
     {
         $rdv = $this->rdvRepository->getRdvById($args['id']);
