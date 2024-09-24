@@ -16,12 +16,8 @@ class ArrayRdvRepository implements RdvRepositoryInterfaces
     public function __construct() {
             $r1 = new Rdv(\DateTimeImmutable::createFromFormat('Y-m-d H:i','2024-09-02 09:00'), 30, new Praticien('A', 'A', 'aa', '098765432'), new Patient('Alban', 'L', 'll', '098765432', 'a@b.fr', 'aaa'), 'Test');
             $r1->setID('r1');
-            $uuid = Uuid::uuid4()->toString();
-            $uuid2 = Uuid::uuid4()->toString();
             $r2 = new Rdv(\DateTimeImmutable::createFromFormat('Y-m-d H:i','2024-09-02 09:00'), 30, new Praticien('B', 'B', 'bb', '098765432'), new Patient( 'Bea', 'L', 'll', '098765432', 'a@b.fr', 'aaa'), 'Test');
             $r2->setID('r2');
-            $uuid = Uuid::uuid4()->toString();
-            $uuid2 = Uuid::uuid4()->toString();
             $r3 = new Rdv(\DateTimeImmutable::createFromFormat('Y-m-d H:i','2024-09-02 09:00'), 30, new Praticien('C', 'C', 'cc', '098765432'), new Patient('Ckaude', 'L', 'll', '098765432', 'a@b.fr', 'aaa'), 'Test');
             $r3->setID('r3');
 
