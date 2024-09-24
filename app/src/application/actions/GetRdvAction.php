@@ -23,9 +23,9 @@ class GetRdvAction extends AbstractAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         try {
-            $rdv_dto = $this->serviceRdv->consultRdv((int)$args['id']);
+            $rdv_dto = $this->serviceRdv->consultRdv((string)$args['id']);
         } catch (ServiceRdvInvalidDataException $e) {
-            throw new HttpNotFoundException($request, $e->getMessage());
+            throw new HttpNotFoundException($request, $e->getMessage(). ' : '.$args['id']);
         }
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();
         $data = [
@@ -35,6 +35,7 @@ class GetRdvAction extends AbstractAction
                 'update' => ['href' => $routeParser->urlFor('updateRdv', ['id' => $rdv_dto->ID])]
             ]
         ];
+        var_dump($data);
         return JsonRenderer::render($response, 200, $data);
     }
 }

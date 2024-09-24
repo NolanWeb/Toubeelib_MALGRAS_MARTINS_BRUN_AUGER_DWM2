@@ -21,7 +21,7 @@ class ServiceRdv implements ServiceRdvInterface
     /**
      * @throws ServiceRdvInvalidDataException
      */
-    public function consultRdv(int $rdvID): RdvDTO
+    public function consultRdv(string $rdvID): RdvDTO
     {
         try {
             $rdv = $this->rdvRepository->getRdvById($rdvID);

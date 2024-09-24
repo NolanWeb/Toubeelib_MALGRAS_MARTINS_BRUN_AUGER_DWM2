@@ -13,12 +13,12 @@ class Rdv extends Entity
     protected ?string $ID;
     protected DateTimeImmutable $date;
     protected int $duree;
-    protected Praticien $praticien;
-    protected Patient $patient;
+    protected string $praticien;
+    protected string $patient;
     protected string $specialite;
     protected string $statut;
 
-    public function __construct(DateTimeImmutable $date, int $duree, Praticien $praticien, Patient $patient, string $specialite)
+    public function __construct(DateTimeImmutable $date, int $duree, string $praticien, string $patient, string $specialite)
     {
         $this->date = $date;
         $this->duree = $duree;

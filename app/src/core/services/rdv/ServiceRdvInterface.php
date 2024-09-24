@@ -8,7 +8,7 @@ use toubeelib\core\dto\rdv\RdvDTO;
 interface ServiceRdvInterface
 {
 
-    public function consultRdv(int $rdvID): RdvDTO;
+    public function consultRdv(string $rdvID): RdvDTO;
 
 
 }
