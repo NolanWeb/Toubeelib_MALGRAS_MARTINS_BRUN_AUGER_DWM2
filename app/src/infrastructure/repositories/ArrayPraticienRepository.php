@@ -46,11 +46,13 @@ class ArrayPraticienRepository implements PraticienRepositoryInterface
         $this->praticiens['p1']->setSpecialite(new Specialite('A', 'Dentiste', 'Spécialiste des dents'));
         $this->praticiens['p1']->setID('p1');
 
-        $this->praticiens['p2'] = new Praticien( 'Durand', 'Pierre', 'vandeuve', '0123456789');
+        $uuid = Uuid::uuid4()->toString();
+        $this->praticiens['p2'] = new Praticien('Durand', 'Pierre', 'vandeuve', '0123456789');
         $this->praticiens['p2']->setSpecialite(new Specialite('B', 'Ophtalmologue', 'Spécialiste des yeux'));
         $this->praticiens['p2']->setID('p2');
 
-        $this->praticiens['p3'] = new Praticien( 'Martin', 'Marie', '3lassou', '0123456789');
+        $uuid = Uuid::uuid4()->toString();
+        $this->praticiens['p3'] = new Praticien('Martin', 'Marie', '3lassou', '0123456789');
         $this->praticiens['p3']->setSpecialite(new Specialite('C', 'Généraliste', 'Médecin généraliste'));
         $this->praticiens['p3']->setID('p3');
 

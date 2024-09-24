@@ -7,7 +7,7 @@ use toubeelib\core\dto\DTO;
 
 class PraticienDTO extends DTO
 {
-    protected string $ID;
+    protected ?string $ID;
     protected string $nom;
     protected string $prenom;
     protected string $adresse;

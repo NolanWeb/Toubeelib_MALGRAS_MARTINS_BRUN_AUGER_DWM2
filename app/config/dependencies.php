@@ -24,7 +24,7 @@ return [
         return new ServiceRdv($container->get(ServicePraticienInterface::class),
             $container->get(ArrayRdvRepository::class),
             $container->get('logger.rdv'));
-    }
+    },
 
 
 ];
