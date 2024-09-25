@@ -7,7 +7,7 @@ use toubeelib\core\dto\practicien\PraticienDTO;
 
 class Praticien extends Entity
 {
-    protected ?string $ID = null; // null par default
+    protected ?string $ID ;
     protected string $nom;
     protected string $prenom;
     protected string $adresse;
@@ -16,11 +16,11 @@ class Praticien extends Entity
 
     public function __construct(string $nom, string $prenom, string $adresse, string $tel, ?string $ID = null)
     {   
+        // $this->ID = $ID->getID(); // passe l'erreur de string a null
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->adresse = $adresse;
         $this->tel = $tel;
-        $this->ID = $ID; // optionel
     }
 
     public function setSpecialite(Specialite $specialite): void
@@ -33,8 +33,4 @@ class Praticien extends Entity
         return new PraticienDTO($this);
     }
 
-    public function getID(): ?string
-    {
-        return $this->ID;
-    }
 }
