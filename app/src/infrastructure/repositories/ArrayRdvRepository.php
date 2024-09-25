@@ -6,6 +6,7 @@ use Ramsey\Uuid\Uuid;
 use toubeelib\core\domain\entities\rdv\Rdv;
 use toubeelib\core\repositoryInterfaces\RdvRepositoryInterfaces;
 use toubeelib\core\repositoryInterfaces\RepositoryEntityNotFoundException;
+use toubeelib\infrastructure\repositories\ArrayPraticienRepository; 
 
 class ArrayRdvRepository implements RdvRepositoryInterfaces
 {
@@ -16,7 +17,7 @@ class ArrayRdvRepository implements RdvRepositoryInterfaces
             $r1->setID('r1');
             $r2 = new Rdv(\DateTimeImmutable::createFromFormat('Y-m-d H:i','2024-09-02 09:00'), 30, 'p2', 'b', 'Test');
             $r2->setID('r2');
-            $r3 = new Rdv(\DateTimeImmutable::createFromFormat('Y-m-d H:i','2024-09-02 09:00'), 30, 'p3', 'c', 'Test');
+            $r3 = new Rdv(\DateTimeImmutable::createFromFormat('Y-m-d H:i','2024-09-02 09:00'), 30,'p3', 'c', 'Test');
             $r3->setID('r3');
 
         $this->rdvs  = ['r1'=> $r1, 'r2'=>$r2, 'r3'=> $r3 ];

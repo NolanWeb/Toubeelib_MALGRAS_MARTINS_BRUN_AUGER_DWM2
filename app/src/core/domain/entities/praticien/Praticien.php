@@ -32,4 +32,9 @@ class Praticien extends Entity
     {
         return new PraticienDTO($this);
     }
+
+    public function getID(): ?string
+    {
+        return $this->ID;
+    }
 }
