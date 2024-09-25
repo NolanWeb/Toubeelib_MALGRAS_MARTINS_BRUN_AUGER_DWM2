@@ -73,6 +73,7 @@ class Rdv extends Entity
 
     public function getPraticienId(): string
     {
+        //get ID attend un objet et on lui donne un string dans ArrayRdvRepository 'p1'...
         return $this->praticien->getID();
     }
 
