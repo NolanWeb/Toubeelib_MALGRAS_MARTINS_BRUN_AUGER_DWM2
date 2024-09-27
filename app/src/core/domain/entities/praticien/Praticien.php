@@ -15,8 +15,7 @@ class Praticien extends Entity
     protected ?Specialite $specialite = null; // Version simplifiée : une seule spécialité
 
     public function __construct(string $nom, string $prenom, string $adresse, string $tel, ?string $ID = null)
-    {   
-        // $this->ID = $ID->getID(); // passe l'erreur de string a null
+    {      
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->adresse = $adresse;

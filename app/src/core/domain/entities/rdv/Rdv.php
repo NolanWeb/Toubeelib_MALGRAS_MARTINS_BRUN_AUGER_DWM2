@@ -6,6 +6,7 @@ use DateTimeImmutable;
 use toubeelib\core\domain\entities\Entity;
 use toubeelib\core\domain\entities\patient\Patient;
 use toubeelib\core\domain\entities\praticien\Praticien;
+use toubeelib\core\domain\entities\praticien\Specialite;
 use toubeelib\core\dto\rdv\RdvDTO;
 
 class Rdv extends Entity
@@ -13,10 +14,10 @@ class Rdv extends Entity
     protected ?string $ID;
     protected DateTimeImmutable $date;
     protected int $duree;
-    protected string $patient;
-    protected string $specialite;
+    protected Patient $patient;
+    protected Specialite $specialite;
     protected string $statut;
-    protected string $praticien;
+    protected Praticien $praticien;
 
     public function __construct(DateTimeImmutable $date, int $duree, string $praticien, string $patient, string $specialite)
     {
@@ -73,7 +74,6 @@ class Rdv extends Entity
 
     public function getPraticienId(): string
     {
-        //get ID attend un objet et on lui donne un string dans ArrayRdvRepository 'p1'...
         return $this->praticien->getID();
     }
 
@@ -82,7 +82,7 @@ class Rdv extends Entity
         return $this->patient->getID();
     }
 
-    public function getSpecialite(): string
+    public function getSpecialite(): Specialite
     {
         return $this->specialite;
     }
