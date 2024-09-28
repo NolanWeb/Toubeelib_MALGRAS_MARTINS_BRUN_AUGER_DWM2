@@ -6,7 +6,7 @@ use Ramsey\Uuid\Uuid;
 use toubeelib\core\domain\entities\rdv\Rdv;
 use toubeelib\core\repositoryInterfaces\RdvRepositoryInterfaces;
 use toubeelib\core\repositoryInterfaces\RepositoryEntityNotFoundException;
-use toubeelib\infrastructure\repositories\ArrayPraticienRepository; 
+
 
 class ArrayRdvRepository implements RdvRepositoryInterfaces
 {

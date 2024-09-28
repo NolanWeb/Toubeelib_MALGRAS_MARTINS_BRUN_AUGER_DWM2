@@ -56,8 +56,6 @@ class ArrayPraticienRepository implements PraticienRepositoryInterface
         $p3->setSpecialite(new Specialite('C', 'Généraliste', 'Médecin généraliste'));
         $p3->setID('p3');
 
-        $this->praticiens  = ['p1'=> $p1, 'p2'=>$p2, 'p3'=> $p3 ];
-
     }
     public function getSpecialiteById(string $id): Specialite
     {

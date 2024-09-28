@@ -14,20 +14,21 @@ class Rdv extends Entity
     protected ?string $ID;
     protected DateTimeImmutable $date;
     protected int $duree;
-    protected Patient $patient;
-    protected Specialite $specialite;
+    protected string $praticien; // Définir comme un objet Praticien
+    protected string $patient;
+    protected string $specialite;
     protected string $statut;
-    protected Praticien $praticien;
 
     public function __construct(DateTimeImmutable $date, int $duree, string $praticien, string $patient, string $specialite)
     {
         $this->date = $date;
         $this->duree = $duree;
-        $this->praticien = $praticien;
+        $this->praticien = $praticien; // Initialiser avec un objet Praticien
         $this->patient = $patient;
         $this->specialite = $specialite;
         $this->statut = "prévu";
     }
+
 
     public function annulerRDV ()
     {
@@ -57,9 +58,9 @@ class Rdv extends Entity
         $this->statut = "non honoré";
     }
 
-    public function getID(): ?string
+    public function getID(): string
     {
-        return $this->ID;
+        return $this->ID ?? '';
     }
 
     public function getDate(): DateTimeImmutable
