@@ -13,9 +13,12 @@ return function( \Slim\App $app):\Slim\App {
         ->setName('getRdv');
     $app->post('/rdv/create',
         \toubeelib\application\actions\CreateRdvAction::class);
+
     $app->put('/rdv/{id}/update',
         \toubeelib\application\actions\UpdateRdvAction::class)
         ->setName('updateRdv');
+
+        
 
     return $app;
 };
