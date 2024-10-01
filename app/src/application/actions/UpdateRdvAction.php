@@ -4,6 +4,7 @@ namespace toubeelib\application\actions;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use toubeelib\application\renderer\JsonRenderer;
 use toubeelib\core\services\rdv\ServiceRdvInterface;
 
 class UpdateRdvAction extends AbstractAction
@@ -17,15 +18,19 @@ class UpdateRdvAction extends AbstractAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $data = $request->getParsedBody();
-
-        $data['date'] = \DateTimeImmutable::createFromFormat('Y-m-d H:i', $data['date']);
-        
+        $data['ID'] = $args['id'];
+        $OldRdv = json_encode($this->serviceRdv->consultRdv($data['ID'])->jsonSerialize());
         $rdv = $this->serviceRdv->updateRdv($data);
 
-        $response->getBody()->write(json_encode($rdv->jsonSerialize()));
+        $response->getBody()->write($OldRdv.json_encode($rdv->jsonSerialize()));
 
-        return $response->withStatus(200)
-            ->withHeader('Content-Type', 'application/json')
-            ->withHeader('Location', '/rdvs/'.$rdv->getID());
+        $data = [
+            'links' => [
+                'self' => ['href' => '/rdv/'.$rdv->getID()],
+                'update' => ['href' => '/rdv/'.$rdv->getID()]
+            ]
+        ];
+
+        return JsonRenderer::render($response, 200, $data);
     }
 }

@@ -12,7 +12,7 @@ interface ServiceRdvInterface
     public function consultRdv(string $rdvID): RdvDTO;
     public function createRdv($rdv): RdvDTO;
     public function getAllRdvs(): array;
-    public function updateRdv(RdvDTO $rdvDTO): RdvDTO;
+    public function updateRdv($rdv): RdvDTO;
     public function deleteRdv(string $rdvID): RdvDTO;
 
 

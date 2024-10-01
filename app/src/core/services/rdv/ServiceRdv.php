@@ -71,8 +71,15 @@ class ServiceRdv implements ServiceRdvInterface
     }
 
 
-    public function updateRdv(RdvDTO $rdvDTO): RdvDTO
+    public function updateRdv($rdv): RdvDTO
     {
-        // TODO: Implement updateRdv() method.
+        if (isset($rdv['specialite'])) {
+            $this->rdvRepository->getRdvById($rdv['ID'])->modifierSpecialite($rdv['specialite']);
+        } else if (isset($rdv['patientId'])) {
+            $this->rdvRepository->getRdvById($rdv['ID'])->modifierPatientRDV($rdv['patientId']);
+        } else {
+            throw new ServiceRdvInvalidDataException('Invalid Rdv data');
+        }
+        return new RdvDTO($this->rdvRepository->getRdvById($rdv['ID']));
     }
 }
