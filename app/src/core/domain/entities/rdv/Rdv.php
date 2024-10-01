@@ -3,6 +3,7 @@
 namespace toubeelib\core\domain\entities\rdv;
 
 use DateTimeImmutable;
+use PhpParser\Node\Scalar\String_;
 use toubeelib\core\domain\entities\Entity;
 use toubeelib\core\domain\entities\patient\Patient;
 use toubeelib\core\domain\entities\praticien\Praticien;
@@ -82,7 +83,7 @@ class Rdv extends Entity
         return $this->patientId;
     }
 
-    public function getSpecialite(): Specialite
+    public function getSpecialite(): String
     {
         return $this->specialite;
     }

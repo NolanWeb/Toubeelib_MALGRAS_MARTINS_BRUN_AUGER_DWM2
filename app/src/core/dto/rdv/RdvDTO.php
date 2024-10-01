@@ -14,6 +14,7 @@ class RdvDTO extends DTO implements \JsonSerializable
     protected string $praticienId;
     protected string $patientId;
     protected string $statut;
+    protected string $specialite;
 
 
     public function __construct(Rdv $rdv)
@@ -23,6 +24,7 @@ class RdvDTO extends DTO implements \JsonSerializable
         $this->praticienId = $rdv->praticienId;
         $this->patientId = $rdv->patientId;
         $this->statut = $rdv->statut;
+        $this->specialite = $rdv->specialite;
     }
 
 public function jsonSerialize(): array
@@ -32,8 +34,13 @@ public function jsonSerialize(): array
         'date' => $this->date->format('Y-m-d H:i'),
         'praticienId' => $this->praticienId,
         'patientId' => $this->patientId,
-        'statut' => $this->statut
+        'statut' => $this->statut,
+        'specialite' => $this->specialite
     ];
 
+}
+public function getId()
+{
+    return $this->ID;
 }
 }

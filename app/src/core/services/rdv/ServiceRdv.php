@@ -2,6 +2,9 @@
 
 namespace toubeelib\core\services\rdv;
 
+use PhpParser\Node\Expr\Cast\Object_;
+use Ramsey\Uuid\Uuid;
+use toubeelib\core\domain\entities\rdv\Rdv;
 use toubeelib\core\dto\rdv\RdvDTO;
 use toubeelib\core\services\praticien\ServicePraticienInterface;
 use toubeelib\core\repositoryInterfaces\RdvRepositoryInterfaces;
@@ -39,9 +42,18 @@ class ServiceRdv implements ServiceRdvInterface
             throw new ServiceRdvInvalidDataException('Invalid Rdv ID');
         }
 
-        $praticien = $this->praticienService->getPraticienById($rdv->getPraticienId());
+        return new RdvDTO($rdv);
+    }
 
-        return new RdvDTO($rdv, $praticien);
+    public function createRdv($rdv): RdvDTO
+    {
+        $newRdv = new Rdv($rdv['date'], $rdv['duree'], $rdv['praticienId'], $rdv['patientId'], $rdv['specialite']);
+        $newRdv->setID(Uuid::uuid4()->toString());
+
+        $this->rdvRepository->save($newRdv);
+
+        $dto = new RdvDTO($newRdv);
+        return $dto;
     }
 
     /**
@@ -58,10 +70,6 @@ class ServiceRdv implements ServiceRdvInterface
         return new RdvDTO($rdv);
     }
 
-    public function createRdv(RdvDTO $rdvDTO): RdvDTO
-    {
-        // TODO: Implement createRdv() method.
-    }
 
     public function updateRdv(RdvDTO $rdvDTO): RdvDTO
     {
