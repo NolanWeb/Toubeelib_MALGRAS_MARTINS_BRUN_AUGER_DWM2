@@ -12,7 +12,7 @@ class Praticien extends Entity
     protected string $prenom;
     protected string $adresse;
     protected string $tel;
-    protected ?Specialite $specialite = null; // Version simplifiée : une seule spécialité
+    protected ?Specialite $specialite = null; // Version simplifiée : pass de spécialité
 
     public function __construct(string $nom, string $prenom, string $adresse, string $tel, string $ID = null)
     {

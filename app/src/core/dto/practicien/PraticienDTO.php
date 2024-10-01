@@ -14,17 +14,17 @@ class PraticienDTO extends DTO
     protected string $tel;
     protected string $specialite_label = ''; // string vide par default
 
-    public function __construct(Praticien $p)
+    public function __construct(Praticien $praticien)
     {
-        $this->ID = $p->getID();
-        $this->nom = $p->nom;
-        $this->prenom = $p->prenom;
-        $this->adresse = $p->adresse;
-        $this->tel = $p->tel;
+        $this->ID = $praticien->getID();
+        $this->nom = $praticien->nom;
+        $this->prenom = $praticien->prenom;
+        $this->adresse = $praticien->adresse;
+        $this->tel = $praticien->tel;
 
         // au cas ou pas de specialite
-        if ($p->specialite !== null) {
-            $this->specialite_label = $p->specialite->label;
+        if ($praticien->specialite !== null) {
+            $this->specialite_label = $praticien->specialite->label;
         }
     }
 }

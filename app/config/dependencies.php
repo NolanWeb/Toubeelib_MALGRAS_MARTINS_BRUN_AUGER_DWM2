@@ -19,19 +19,18 @@ return [
         $logger = new Logger($container->get('log.rdv.name'));
         $logger->pushHandler(new StreamHandler($container->get('log.rdv.path'), \Monolog\Logger::DEBUG));
     },
-     */
-    'logger.array.rdv' => function (\Psr\Container\ContainerInterface $container) {
-        return new ArrayRdvRepository();
-    },
-
+     */ 
+    'logger.service.praticien' => function(\Psr\Container\ContainerInterface $container) {
+        return new ServicePraticien($container->get('logger.praticien'));
+    },    
+    
     'logger.praticien' => function (\Psr\Container\ContainerInterface $container) {
         return new ArrayPraticienRepository();
     },
 
-    'logger.service.praticien' => function(\Psr\Container\ContainerInterface $container) {
-        return new ServicePraticien($container->get('logger.praticien'));
+    'logger.array.rdv' => function (\Psr\Container\ContainerInterface $container) {
+        return new ArrayRdvRepository();
     },
-
 
 
     'logger.rdv' => function(\Psr\Container\ContainerInterface $container) {

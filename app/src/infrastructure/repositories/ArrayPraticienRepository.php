@@ -42,19 +42,17 @@ class ArrayPraticienRepository implements PraticienRepositoryInterface
     private array $praticiens = [];
 
     public function __construct() {
-        $p1 = new Praticien( 'Dupont', 'Jean', 'nancy', '0123456789');
-        $p1->setSpecialite(new Specialite('A', 'Dentiste', 'Spécialiste des dents'));
-        $p1->setID('p1');
+        $this->praticiens['p1'] = new Praticien( 'Dupont', 'Jean', 'nancy', '0123456789');
+        $this->praticiens['p1']->setSpecialite(new Specialite('A', 'Dentiste', 'Spécialiste des dents'));
+        $this->praticiens['p1']->setID('p1');
 
-        // $uuid = Uuid::uuid4()->toString();
-        $p2 = new Praticien('Durand', 'Pierre', 'vandeuve', '0123456789');
-        $p2->setSpecialite(new Specialite('B', 'Ophtalmologue', 'Spécialiste des yeux'));
-        $p2->setID('p2');
+        $this->praticiens['p2'] = new Praticien( 'Durand', 'Pierre', 'vandeuve', '0123456789');
+        $this->praticiens['p2']->setSpecialite(new Specialite('B', 'Ophtalmologue', 'Spécialiste des yeux'));
+        $this->praticiens['p2']->setID('p2');
 
-        // $uuid = Uuid::uuid4()->toString();
-        $p3 = new Praticien('Martin', 'Marie', '3lassou', '0123456789');
-        $p3->setSpecialite(new Specialite('C', 'Généraliste', 'Médecin généraliste'));
-        $p3->setID('p3');
+        $this->praticiens['p3'] = new Praticien( 'Martin', 'Marie', '3lassou', '0123456789');
+        $this->praticiens['p3']->setSpecialite(new Specialite('C', 'Généraliste', 'Médecin généraliste'));
+        $this->praticiens['p3']->setID('p3');
 
     }
     public function getSpecialiteById(string $id): Specialite

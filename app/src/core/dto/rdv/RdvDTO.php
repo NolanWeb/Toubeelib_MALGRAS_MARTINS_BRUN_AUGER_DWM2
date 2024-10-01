@@ -3,17 +3,16 @@
 namespace toubeelib\core\dto\rdv;
 
 use DateTimeImmutable;
-use toubeelib\core\domain\entities\patient\Patient;
 use toubeelib\core\domain\entities\praticien\Praticien;
 use toubeelib\core\domain\entities\rdv\Rdv;
 use toubeelib\core\dto\DTO;
 
-class RdvDTO extends DTO
+class RdvDTO extends DTO implements \JsonSerializable
 {
     protected string $ID;
     protected DateTimeImmutable $date;
-    protected Praticien $praticien;
-    protected Patient $patient;
+    protected string $praticienId;
+    protected string $patientId;
     protected string $statut;
 
 
@@ -21,10 +20,20 @@ class RdvDTO extends DTO
     {
         $this->ID = $rdv->getID();
         $this->date = $rdv->date;
-        $this->praticien = $rdv->praticien;
-        $this->patient = $rdv->patient;
+        $this->praticienId = $rdv->praticienId;
+        $this->patientId = $rdv->patientId;
         $this->statut = $rdv->statut;
     }
 
+public function jsonSerialize(): array
+{
+    return [
+        'ID' => $this->ID,
+        'date' => $this->date->format('Y-m-d H:i'),
+        'praticienId' => $this->praticienId,
+        'patientId' => $this->patientId,
+        'statut' => $this->statut
+    ];
 
+}
 }

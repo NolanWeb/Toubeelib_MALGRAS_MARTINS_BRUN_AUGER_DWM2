@@ -11,6 +11,8 @@ use toubeelib\core\services\rdv\ServiceRdvInterface;
 use toubeelib\core\services\rdv\ServiceRdvInvalidDataException;
 use toubeelib\infrastructure\repositories\ArrayRdvRepository;
 
+use function PHPSTORM_META\type;
+
 class GetRdvAction extends AbstractAction
 {
     protected ServiceRdvInterface $serviceRdv;
@@ -35,7 +37,7 @@ class GetRdvAction extends AbstractAction
                 'update' => ['href' => $routeParser->urlFor('updateRdv', ['id' => $rdv_dto->ID])]
             ]
         ];
-        var_dump($data);
+        
         return JsonRenderer::render($response, 200, $data);
     }
 }
