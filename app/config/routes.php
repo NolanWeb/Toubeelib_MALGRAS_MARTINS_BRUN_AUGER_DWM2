@@ -11,15 +11,18 @@ return function( \Slim\App $app):\Slim\App {
     $app->get('/rdvs[/]',
         \toubeelib\application\actions\GetAllRdvsAction::class)
         ->setName('getAllRdvs');
-    $app->get('/rdvs/{id}[/]',
+
+    $app->get('/rdv/{id}[/]',
         \toubeelib\application\actions\GetRdvAction::class)
         ->setName('getRdv');
+
     $app->post('/rdv/create',
         \toubeelib\application\actions\CreateRdvAction::class);
 
-    $app->put('/rdv/{id}/update',
+    $app->patch('/rdv/{id}',
         \toubeelib\application\actions\UpdateRdvAction::class)
         ->setName('updateRdv');
+        
     $app->delete('/rdv/{id}',
         \toubeelib\application\actions\DeleteRdvAction::class)
         ->setName('deleteRdv');
