@@ -23,6 +23,11 @@ class ArrayRdvRepository implements RdvRepositoryInterfaces
         $this->rdvs  = ['r1'=> $r1, 'r2'=>$r2, 'r3'=> $r3 ];
     }
 
+    public function getAllRdvs(): array
+    {
+        return array_values($this->rdvs);
+    }
+
     public function getRdvById(string $id): Rdv
     {
         if (!isset($this->rdvs[$id])) {
@@ -39,6 +44,9 @@ class ArrayRdvRepository implements RdvRepositoryInterfaces
         return $ID;
     }
 
+    /**
+     * @throws RepositoryEntityNotFoundException
+     */
     public function update(Rdv $rdv): void
     {
         $id = $rdv->getID();
@@ -56,11 +64,26 @@ class ArrayRdvRepository implements RdvRepositoryInterfaces
         unset($this->rdvs[$id]);
     }
 
+    /**
+     * @throws RepositoryEntityNotFoundException
+     */
     public function consultRdv(string $id): Rdv
     {
         if (!isset($this->rdvs[$id])) {
             throw new RepositoryEntityNotFoundException("Rendez-vous not found");
         }
+        return $this->rdvs[$id];
+    }
+
+    /**
+     * @throws RepositoryEntityNotFoundException
+     */
+    public function deleteRdv(string $id): Rdv
+    {
+        if (!isset($this->rdvs[$id])) {
+            throw new RepositoryEntityNotFoundException("Rendez-vous not found");
+        }
+        $this->rdvs[$id]->deleteRDV();
         return $this->rdvs[$id];
     }
 }

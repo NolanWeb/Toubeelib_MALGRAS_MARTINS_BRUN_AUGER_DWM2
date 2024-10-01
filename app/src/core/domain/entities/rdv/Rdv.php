@@ -29,9 +29,7 @@ class Rdv extends Entity
         $this->statut = "prévu";
     }
 
-    
-
-    public function annulerRDV ()
+    public function deleteRDV (): void
     {
         $this->statut = "annulé";
     }

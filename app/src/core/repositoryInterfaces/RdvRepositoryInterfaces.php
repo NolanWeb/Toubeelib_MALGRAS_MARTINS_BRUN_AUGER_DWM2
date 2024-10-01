@@ -7,5 +7,6 @@ use toubeelib\core\domain\entities\rdv\Rdv;
 interface RdvRepositoryInterfaces
 {
     public function consultRdv(string $id): Rdv;
+    public function deleteRdv(string $id): Rdv;
 
 }
