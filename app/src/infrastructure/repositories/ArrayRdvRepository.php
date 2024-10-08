@@ -92,4 +92,17 @@ class ArrayRdvRepository implements RdvRepositoryInterfaces
         $this->rdvs[$id]->deleteRDV();
         return $this->rdvs[$id];
     }
+
+    public function getRdvsByPraticienAndWeek(string $praticienId, string $week): array
+    {
+        $rdvs = [];
+        foreach ($this->rdvs as $rdv) {
+            if ($rdv->getPraticienId() === $praticienId) {
+                if ($rdv->getDate()->format('W') === $week) {
+                    $rdvs[] = $rdv;
+                }
+            }
+        }
+        return $rdvs;
+    }
 }

@@ -10,4 +10,6 @@ interface RdvRepositoryInterfaces
     public function save(Rdv $rdv): string;
     public function deleteRdv(string $id): Rdv;
     public function getRdvsByPraticienId(string $praticienId): array;
+    public function getRdvsByPraticienAndWeek(string $praticienId, string $week): array;
+
 }

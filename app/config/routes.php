@@ -32,7 +32,9 @@ return function( \Slim\App $app):\Slim\App {
         \toubeelib\application\actions\GetPraticienDispoAction::class)
         ->setName('getPraticienDispo');
 
-        
+    $app->get('/praticiens/{id}/rdvs/{week}',
+        \toubeelib\application\actions\GetRdvsByPraticienAction::class)
+        ->setName('getRdvsByPraticien');
 
     return $app;
 };

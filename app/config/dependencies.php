@@ -5,6 +5,7 @@ use toubeelib\application\actions\CreateRdvAction;
 use toubeelib\application\actions\DeleteRdvAction;
 use toubeelib\application\actions\GetAllRdvsAction;
 use toubeelib\application\actions\GetRdvAction;
+use toubeelib\application\actions\GetRdvsByPraticienAction;
 use toubeelib\application\actions\UpdateRdvAction;
 use toubeelib\application\actions\GetPraticienDispoAction;
 use toubeelib\core\services\praticien\ServicePraticien;
@@ -48,6 +49,9 @@ return [
     },
     GetPraticienDispoAction::class => function (\Psr\Container\ContainerInterface $container) {
         return new GetPraticienDispoAction($container->get('logger.rdv'));
+    },
+    GetRdvsByPraticienAction::class => function (\Psr\Container\ContainerInterface $container) {
+        return new GetRdvsByPraticienAction($container->get('logger.rdv'));
     },
 
     
