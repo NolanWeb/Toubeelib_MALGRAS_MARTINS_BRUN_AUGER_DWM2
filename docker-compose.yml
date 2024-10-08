@@ -31,7 +31,7 @@ services:
     networks:
       - toubeelib.net
     volumes: 
-      - ./app/sql:/var/sql'
+      - ./app/sql:/var/sql
   #
   # service administration des bases sql
   #

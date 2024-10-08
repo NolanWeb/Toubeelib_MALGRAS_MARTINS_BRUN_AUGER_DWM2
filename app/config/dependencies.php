@@ -15,6 +15,15 @@ use toubeelib\infrastructure\repositories\ArrayRdvRepository;
 
 
 return [
+
+    'praticien.pdo' => function (ContainerInterface $container) {
+        $config = parse_ini_file(__DIR__ . '/config.ini');
+        $dsn = "{$config['driver']}:host={$config['host']};dbname={$config['dbname']}";
+        $user = $config['user'];
+        $password = $config['password'];
+        return new \PDO($dsn, $user, $password);
+    },
+
     'logger.service.praticien' => function(\Psr\Container\ContainerInterface $container) {
         return new ServicePraticien($container->get('logger.praticien'));
     },    
@@ -53,7 +62,4 @@ return [
     GetRdvsByPraticienAction::class => function (\Psr\Container\ContainerInterface $container) {
         return new GetRdvsByPraticienAction($container->get('logger.rdv'));
     },
-
-    
-
 ];

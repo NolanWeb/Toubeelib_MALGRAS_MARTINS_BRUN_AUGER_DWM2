@@ -16,7 +16,6 @@ class Praticien extends Entity
 
     public function __construct(string $nom, string $prenom, string $adresse, string $tel, string $ID = null)
     {
-        $this->ID = $ID;
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->adresse = $adresse;
@@ -33,9 +32,29 @@ class Praticien extends Entity
         return new PraticienDTO($this);
     }
 
-    public function getID(): ?string
+    public function getNom(): string
     {
-        return $this->ID;
+        return $this->nom;
+    }
+
+    public function getPrenom(): string
+    {
+        return $this->prenom;
+    }
+
+    public function getAdresse(): string
+    {
+        return $this->adresse;
+    }
+
+    public function getTelephone(): string
+    {
+        return $this->tel;
+    }
+
+    public function getSpecialite(): ?Specialite
+    {
+        return $this->specialite;
     }
 
 }

@@ -7,6 +7,14 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 return function( \Slim\App $app):\Slim\App {
 
+    $app->add(new \toubeelib\application\middlewares\Cors::class );
+
+    $app->options('/{routes:.+}',
+        function( Request $rq,
+                  Response $rs, array $args) : Response {
+            return $rs;
+        });
+
     $app->get('/',
         \toubeelib\application\actions\HomeAction::class);
     $app->get('/rdvs[/]',
