@@ -1,21 +1,17 @@
 <?php
 
-
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
 use Psr\Container\ContainerInterface;
 use toubeelib\application\actions\CreateRdvAction;
 use toubeelib\application\actions\DeleteRdvAction;
 use toubeelib\application\actions\GetAllRdvsAction;
 use toubeelib\application\actions\GetRdvAction;
 use toubeelib\application\actions\UpdateRdvAction;
-use toubeelib\core\repositoryInterfaces\PraticienRepositoryInterface;
+use toubeelib\application\actions\GetPraticienDispoAction;
 use toubeelib\core\services\praticien\ServicePraticien;
-use toubeelib\core\services\praticien\ServicePraticienInterface;
 use toubeelib\core\services\rdv\ServiceRdv;
-use toubeelib\core\services\rdv\ServiceRdvInterface;
 use toubeelib\infrastructure\repositories\ArrayPraticienRepository;
 use toubeelib\infrastructure\repositories\ArrayRdvRepository;
+
 
 return [
     'logger.service.praticien' => function(\Psr\Container\ContainerInterface $container) {
@@ -34,6 +30,7 @@ return [
     'logger.rdv' => function(\Psr\Container\ContainerInterface $container) {
         return new ServiceRdv($container->get('logger.array.rdv'), $container->get('logger.service.praticien'));
     },
+
     GetRdvAction::class => function (\Psr\Container\ContainerInterface $container) {
         return new GetRdvAction($container->get('logger.rdv'));
     },
@@ -49,5 +46,10 @@ return [
     UpdateRdvAction::class => function (\Psr\Container\ContainerInterface $container) {
         return new UpdateRdvAction($container->get('logger.rdv'));
     },
+    GetPraticienDispoAction::class => function (\Psr\Container\ContainerInterface $container) {
+        return new GetPraticienDispoAction($container->get('logger.rdv'));
+    },
+
+    
 
 ];

@@ -82,4 +82,15 @@ class ServiceRdv implements ServiceRdvInterface
         }
         return new RdvDTO($this->rdvRepository->getRdvById($rdv['ID']));
     }
+
+    public function getRdvsByPraticienId(string $praticienId): array
+    {
+        $rdvs = $this->rdvRepository->getRdvsByPraticienId($praticienId);
+        $rdvDTOs = [];
+        foreach ($rdvs as $rdv) {
+            $praticien = $this->praticienService->getPraticienById($rdv->getPraticienId());
+            $rdvDTOs[] = new RdvDTO($rdv, $praticien);
+        }
+        return $rdvDTOs;
+    }
 }

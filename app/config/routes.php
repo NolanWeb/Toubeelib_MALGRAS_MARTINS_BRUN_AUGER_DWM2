@@ -4,6 +4,7 @@ declare(strict_types=1);
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
+
 return function( \Slim\App $app):\Slim\App {
 
     $app->get('/',
@@ -26,6 +27,10 @@ return function( \Slim\App $app):\Slim\App {
     $app->delete('/rdv/{id}',
         \toubeelib\application\actions\DeleteRdvAction::class)
         ->setName('deleteRdv');
+
+    $app->get('/praticiens/{praticienId}/rdvs', 
+        \toubeelib\application\actions\GetPraticienDispoAction::class)
+        ->setName('getPraticienDispo');
 
         
 

@@ -28,6 +28,13 @@ class ArrayRdvRepository implements RdvRepositoryInterfaces
         return array_values($this->rdvs);
     }
 
+    public function getRdvsByPraticienId(string $praticienId): array
+    {
+        return array_filter($this->rdvs, function (Rdv $rdv) use ($praticienId) {
+            return $rdv->getPraticienId() === $praticienId;
+        });
+    }
+
     public function getRdvById(string $id): Rdv
     {
         if (!isset($this->rdvs[$id])) {
