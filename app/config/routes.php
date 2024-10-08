@@ -7,13 +7,11 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 return function( \Slim\App $app):\Slim\App {
 
-    $app->add(\toubeelib\application\middlewares\Cors::class );
+    $app->add(\toubeelib\application\middlewares\Cors::class);
 
-    $app->options('/{routes:.+}',
-        function( Request $rq,
-                  Response $rs, array $args) : Response {
-            return $rs;
-        });
+    $app->options('/{routes:.+}', function (Request $rq, Response $rs, array $args): Response {
+        return $rs;
+    });
 
     $app->get('/',
         \toubeelib\application\actions\HomeAction::class);
@@ -22,18 +20,18 @@ return function( \Slim\App $app):\Slim\App {
         \toubeelib\application\actions\GetAllRdvsAction::class)
         ->setName('getAllRdvs');
 
-    $app->get('/rdv/{id}[/]',
+    $app->get('/rdvs/{id}[/]',
         \toubeelib\application\actions\GetRdvAction::class)
         ->setName('getRdv');
 
-    $app->post('/rdv/create',
+    $app->post('/rdvs/create',
         \toubeelib\application\actions\CreateRdvAction::class);
 
-    $app->patch('/rdv/{id}',
+    $app->patch('/rdvs/{id}',
         \toubeelib\application\actions\UpdateRdvAction::class)
         ->setName('updateRdv');
         
-    $app->delete('/rdv/{id}',
+    $app->delete('/rdvs/{id}',
         \toubeelib\application\actions\DeleteRdvAction::class)
         ->setName('deleteRdv');
 
