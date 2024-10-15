@@ -2,7 +2,7 @@
 
 namespace toubeelib\core\services\rdv;
 
-
+use PhpParser\Node\Expr\Cast\Object_;
 use Ramsey\Uuid\Uuid;
 use toubeelib\core\domain\entities\rdv\Rdv;
 use toubeelib\core\dto\rdv\RdvDTO;
@@ -92,5 +92,36 @@ class ServiceRdv implements ServiceRdvInterface
             $rdvDTOs[] = new RdvDTO($rdv, $praticien);
         }
         return $rdvDTOs;
+    }
+
+    public function getRdvsByPraticienAndWeek(string $praticienId, string $week): array
+    {
+        $rdvs = $this->rdvRepository->getRdvsByPraticienAndWeek($praticienId, $week);
+        $nrdvs = [
+            [
+                "free","free","free","free","free","free","free","free"
+            ],
+            [
+                "free","free","free","free","free","free","free","free"
+            ],
+            [
+                "free","free","free","free","free","free","free","free"
+            ],
+            [
+                "free","free","free","free","free","free","free","free"
+            ],
+            [
+                "free","free","free","free","free","free","free","free"
+            ]
+        ];
+
+        foreach ($rdvs as $rdv) {
+            $day = $rdv->getDate()->format('N') - 1;
+            $hour = $rdv->getDate()->format('H');
+            $h = $hour - 8;
+            $nrdvs[$day][$h] = $rdv->getID();
+
+        }
+        return $nrdvs;
     }
 }
