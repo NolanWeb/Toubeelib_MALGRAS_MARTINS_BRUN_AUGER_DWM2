@@ -81,4 +81,12 @@ class ArrayPraticienRepository implements PraticienRepositoryInterface
         return $praticien;
     }
 
+    public function getAllPraticiens(): array
+    {
+        if (empty($this->praticiens)) {
+            throw new RepositoryEntityNotFoundException("No praticiens found");
+        }
+
+        return array_values($this->praticiens);
+    }
 }

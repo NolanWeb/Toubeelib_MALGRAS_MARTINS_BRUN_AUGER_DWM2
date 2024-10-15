@@ -43,5 +43,10 @@ return function( \Slim\App $app):\Slim\App {
         \toubeelib\application\actions\GetRdvsByPraticienAction::class)
         ->setName('getRdvsByPraticien');
 
+    $app->get('/praticiens[/]', \toubeelib\application\actions\GetAllPraticiensAction::class)
+        ->setName('getAllPraticiens');
+
+        
+
     return $app;
 };

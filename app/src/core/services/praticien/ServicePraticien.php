@@ -7,6 +7,7 @@ use toubeelib\core\dto\practicien\PraticienDTO;
 use toubeelib\core\dto\practicien\SpecialiteDTO;
 use toubeelib\core\repositoryInterfaces\PraticienRepositoryInterface;
 use toubeelib\core\repositoryInterfaces\RepositoryEntityNotFoundException;
+use toubeelib\core\services\praticien\ServicePraticienInterface;
 
 class ServicePraticien implements ServicePraticienInterface
 {
@@ -42,5 +43,11 @@ class ServicePraticien implements ServicePraticienInterface
         } catch(RepositoryEntityNotFoundException $e) {
             throw new ServicePraticienInvalidDataException('invalid Specialite ID');
         }
+    }
+
+    public function getAllPraticiens(): array
+    {
+        $praticiens = $this->praticienRepository->getAllPraticiens();
+        return array_map(fn($praticien) => new PraticienDTO($praticien), $praticiens);
     }
 }
