@@ -12,5 +12,6 @@ interface PraticienRepositoryInterface
     public function save(Praticien $praticien): string;
     public function getPraticienById(string $id): Praticien;
     public function getAllPraticiens(): array;
+    public function createPraticien(Praticien $praticien): Praticien;
 
 }

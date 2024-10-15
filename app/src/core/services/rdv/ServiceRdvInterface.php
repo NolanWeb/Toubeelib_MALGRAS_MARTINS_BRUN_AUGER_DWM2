@@ -17,5 +17,4 @@ interface ServiceRdvInterface
     public function getRdvsByPraticienId(string $praticienId): array;
     public function getRdvsByPraticienAndWeek(string $praticienId, string $week): array;
 
-
 }

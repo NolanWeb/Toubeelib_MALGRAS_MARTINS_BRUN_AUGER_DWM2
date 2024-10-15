@@ -46,6 +46,14 @@ return function( \Slim\App $app):\Slim\App {
     $app->get('/praticiens[/]', \toubeelib\application\actions\GetAllPraticiensAction::class)
         ->setName('getAllPraticiens');
 
+    $app->post('/praticiens/create',
+    \toubeelib\application\actions\CreatePraticienAction::class);
+
+    $app->get('/praticiens/{id}[/]',
+    \toubeelib\application\actions\GetPraticienAction::class)
+    ->setName('getpraticien');
+
+
         
 
     return $app;

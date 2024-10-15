@@ -8,6 +8,8 @@ use toubeelib\core\dto\practicien\SpecialiteDTO;
 use toubeelib\core\repositoryInterfaces\PraticienRepositoryInterface;
 use toubeelib\core\repositoryInterfaces\RepositoryEntityNotFoundException;
 use toubeelib\core\services\praticien\ServicePraticienInterface;
+use toubeelib\core\domain\entities\praticien\Praticien;
+use Ramsey\Uuid\Uuid;
 
 class ServicePraticien implements ServicePraticienInterface
 {
@@ -16,13 +18,6 @@ class ServicePraticien implements ServicePraticienInterface
     public function __construct(PraticienRepositoryInterface $praticienRepository)
     {
         $this->praticienRepository = $praticienRepository;
-    }
-
-    public function createPraticien(InputPraticienDTO $p): PraticienDTO
-    {
-        // TODO : valider les données et créer l'entité
-        return new PraticienDTO($praticien);
-
     }
 
     public function getPraticienById(string $id): PraticienDTO
@@ -49,5 +44,31 @@ class ServicePraticien implements ServicePraticienInterface
     {
         $praticiens = $this->praticienRepository->getAllPraticiens();
         return array_map(fn($praticien) => new PraticienDTO($praticien), $praticiens);
+    }
+
+    public function createPraticien(InputPraticienDTO $inputPraticienDTO): PraticienDTO
+    {
+        $praticien = new Praticien(
+            $inputPraticienDTO->nom,
+            $inputPraticienDTO->prenom,
+            $inputPraticienDTO->adresse,
+            $inputPraticienDTO->tel
+        );
+
+        $this->praticienRepository->createPraticien($praticien);
+
+        return new PraticienDTO($praticien);
+    }
+
+
+    public function consultPraticien(string $praticienID): PraticienDTO
+    {
+        try {
+            $praticien = $this->praticienRepository->getPraticienById($praticienID);
+        } catch (RepositoryEntityNotFoundException $e) {
+            throw new ServicePraticienInvalidDataException('Invalid praticien ID');
+        }
+
+        return new PraticienDTO($praticien);
     }
 }

@@ -75,10 +75,10 @@ class ArrayPraticienRepository implements PraticienRepositoryInterface
 
     public function getPraticienById(string $id): Praticien
     {
-        $praticien = $this->praticiens[$id] ??
+        if (!isset($this->praticiens[$id])) {
             throw new RepositoryEntityNotFoundException("Praticien $id not found");
-
-        return $praticien;
+        }
+        return $this->praticiens[$id];
     }
 
     public function getAllPraticiens(): array
@@ -88,5 +88,13 @@ class ArrayPraticienRepository implements PraticienRepositoryInterface
         }
 
         return array_values($this->praticiens);
+    }
+
+    public function createPraticien(Praticien $praticien): Praticien
+    {
+        $ID = Uuid::uuid4()->toString();
+        $praticien->setID($ID);
+        $this->praticiens[$ID] = $praticien;
+        return $praticien;
     }
 }
