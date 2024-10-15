@@ -43,4 +43,21 @@ public function getId()
 {
     return $this->ID;
 }
+
+
+public function getDate(): DateTimeImmutable
+{
+    return $this->date;
+}
+
+public function getPraticienId(): string
+{
+    return $this->praticienId;
+}
+
+public function getPatientId(): string
+{
+    return $this->patientId;
+
+}
 }

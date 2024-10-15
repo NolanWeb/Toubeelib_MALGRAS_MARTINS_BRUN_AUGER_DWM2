@@ -15,6 +15,7 @@ use toubeelib\infrastructure\repositories\ArrayPraticienRepository;
 use toubeelib\infrastructure\repositories\ArrayRdvRepository;
 use toubeelib\application\actions\CreatePraticienAction;
 use toubeelib\application\actions\GetPraticienAction;
+use toubeelib\application\actions\GetRdvsByPatientAction;
 
 
 return [
@@ -83,6 +84,10 @@ return [
     },
     GetPraticienAction::class => function (\Psr\Container\ContainerInterface $container) {
         return new GetPraticienAction($container->get('logger.service.praticien'));
+    },
+    
+    GetRdvsByPatientAction::class => function (\Psr\Container\ContainerInterface $container) {
+        return new GetRdvsByPatientAction($container->get('logger.rdv'));
     },
 
 ];

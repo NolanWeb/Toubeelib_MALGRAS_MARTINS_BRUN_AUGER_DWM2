@@ -124,4 +124,14 @@ class ServiceRdv implements ServiceRdvInterface
         }
         return $nrdvs;
     }
+
+    public function getRdvsByPatientId(string $patientId): array
+    {
+        $rdvs = $this->rdvRepository->getRdvsByPatientId($patientId);
+        $rdvDTOs = [];
+        foreach ($rdvs as $rdv) {
+            $rdvDTOs[] = new RdvDTO($rdv);
+        }
+        return $rdvDTOs;
+    }
 }

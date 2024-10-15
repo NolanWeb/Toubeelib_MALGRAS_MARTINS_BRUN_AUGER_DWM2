@@ -105,4 +105,18 @@ class ArrayRdvRepository implements RdvRepositoryInterfaces
         }
         return $rdvs;
     }
+
+    public function getRdvsByPatientId(string $patientId): array
+    {
+        $result = [];
+        foreach ($this->rdvs as $rdv) {
+            if ($rdv->getPatientId() === $patientId) {
+                $result[] = $rdv;
+            }
+        }
+        if (empty($result)) {
+            throw new RepositoryEntityNotFoundException("No rdvs found for patient $patientId");
+        }
+        return $result;
+    }
 }

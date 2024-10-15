@@ -16,5 +16,6 @@ interface ServiceRdvInterface
     public function deleteRdv(string $rdvID): RdvDTO;
     public function getRdvsByPraticienId(string $praticienId): array;
     public function getRdvsByPraticienAndWeek(string $praticienId, string $week): array;
+    public function getRdvsByPatientId(string $patientId): array;
 
 }

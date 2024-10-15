@@ -54,6 +54,9 @@ return function( \Slim\App $app):\Slim\App {
     ->setName('getpraticien');
 
 
+    $app->get('/patients/{id}', \toubeelib\application\actions\GetRdvsByPatientAction::class)
+    ->setName('getRdvsByPatient');
+
         
 
     return $app;
