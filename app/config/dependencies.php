@@ -16,13 +16,22 @@ use toubeelib\infrastructure\repositories\ArrayRdvRepository;
 
 return [
 
-    'praticien.pdo' => function (ContainerInterface $container) {
+'praticien.pdo' => function (ContainerInterface $container) {
         $config = parse_ini_file(__DIR__ . '/config.ini');
         $dsn = "{$config['driver']}:host={$config['host']};dbname={$config['dbname']}";
         $user = $config['user'];
         $password = $config['password'];
-        return new \PDO($dsn, $user, $password);
+        try {
+            $pdo = new \PDO($dsn, $user, $password);
+            $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            echo 'Connexion réussie';
+            return $pdo;
+        } catch (\PDOException $e) {
+            echo 'Connexion échouée : ' . $e->getMessage();
+            return null;
+        }
     },
+
 
     'logger.service.praticien' => function(\Psr\Container\ContainerInterface $container) {
         return new ServicePraticien($container->get('logger.praticien'));
