@@ -87,4 +87,24 @@ class PDOPraticienRepository implements PraticienRepositoryInterface
             throw new RepositoryEntityNotFoundException('Error while fetching praticien');
         }
     }
+
+    public function getAllPraticiens(): array
+    {
+        $query = $this->pdo->prepare('SELECT * FROM praticien');
+        $query->execute();
+        $praticiens = $query->fetchAll();
+        $praticiensList = [];
+        foreach ($praticiens as $praticien) {
+            $p = new Praticien($praticien['nom'], $praticien['prenom'], $praticien['adresse'], $praticien['telephone'], $praticien['specialite_id']);
+            $p->setId($praticien['id']);
+            $p->setSpecialite($this->getSpecialiteById($praticien['specialite_id']));
+            $praticiensList[] = $p;
+        }
+        return $praticiensList;
+    }
+
+    public function createPraticien(Praticien $praticien): Praticien
+    {
+        // TODO: Implement createPraticien() method.
+    }
 }

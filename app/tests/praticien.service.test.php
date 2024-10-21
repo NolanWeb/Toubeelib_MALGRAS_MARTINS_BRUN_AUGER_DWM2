@@ -2,42 +2,17 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$service = new toubeelib\core\services\praticien\ServicePraticien(new \toubeelib\infrastructure\repositories\ArrayPraticienRepository());
+$service = new toubeelib\core\services\praticien\ServicePraticien(new \toubeelib\infrastructure\db\PDOPraticienRepository(new \PDO('pgsql:host=toubeelib.db;dbname=praticien', 'toubeelib', 'toubeelib')));
 
-$pdto = new \toubeelib\core\dto\practicien\InputPraticienDTO('néplin', 'jean', 'vandeuve', '06 07 08 09 11', 'A');
-$pdto2 = new \toubeelib\core\dto\practicien\InputPraticienDTO('némar', 'jean', 'lassou', '06 07 08 09 12', 'B');
+$service2 = new \toubeelib\core\services\rdv\ServiceRdv(new \toubeelib\infrastructure\db\PDORdvRepository
+(new \PDO('pgsql:host=toubeelib.db;dbname=rdv', 'toubeelib', 'toubeelib', [
+    \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+    \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
+    \PDO::ATTR_EMULATE_PREPARES => false,
+    \PDO::ATTR_STRINGIFY_FETCHES => false
+])), $service);
 
-$pe1 = $service->createPraticien($pdto);
-print_r($pe1);
-$pe2 = $service->createPraticien($pdto2);
-print_r($pe2);
-
-$pe11 = $service->getPraticienById($pe1->ID);
-print_r($pe2);
-$pe22 = $service->getPraticienById($pe2->ID);
-
-
-try {
-    $pe33 = $service->getPraticienById('ABCDE');
-} catch (\toubeelib\core\services\praticien\ServicePraticienInvalidDataException $e){
-    echo 'exception dans la récupération d\'un praticien :' . PHP_EOL;
-    echo $e->getMessage(). PHP_EOL;
-}
-
-$pdto3 = new \toubeelib\core\dto\practicien\InputPraticienDTO('némar', 'jean', 'lassou', '06 07 08 09 12', 'Z');
-try {
-    $pe2 = $service->createPraticien($pdto3);
-} catch (\toubeelib\core\services\praticien\ServicePraticienInvalidDataException $e) {
-    echo 'exception dans la création d\'un praticien :' . PHP_EOL;
-    echo $e->getMessage(). PHP_EOL;
-}
-
-try {
-    print 'praticien prédéfini p1 : ' . PHP_EOL;
-    $p1 = $service->getPraticienById('p1');
-    print_r($p1);
-} catch (\toubeelib\core\services\praticien\ServicePraticienInvalidDataException $e){
-    echo 'exception dans la récupération d\'un praticien :' . PHP_EOL;
-    echo $e->getMessage(). PHP_EOL;
-}
-
+$praticien = $service->getPraticienById('383d1f47-dcb1-4e3b-bd4e-1a64b5f33560');
+$rdvs = $service2->getAllRdvs();
+$praticienAll = $service->getAllPraticiens();
+$praticienDispo = $service2->getPraticienDispoByDate(new \DateTimeImmutable('2024-01-01 00:00:00'), new \DateTimeImmutable('2024-12-31 23:59:59'));

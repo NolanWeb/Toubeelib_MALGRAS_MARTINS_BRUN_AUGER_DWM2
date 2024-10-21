@@ -47,7 +47,7 @@ class ServiceRdv implements ServiceRdvInterface
 
     public function createRdv($rdv): RdvDTO
     {
-        $newRdv = new Rdv($rdv['date'], $rdv['duree'], $rdv['praticienId'], $rdv['patientId'], $rdv['specialite']);
+        $newRdv = new Rdv($rdv['date'], $rdv['duree'], $rdv['praticienId'], $rdv['patientId'], $rdv['specialite'], $rdv['lieu'], $rdv['type']);
         $newRdv->setID(Uuid::uuid4()->toString());
 
         $this->rdvRepository->save($newRdv);
@@ -133,5 +133,25 @@ class ServiceRdv implements ServiceRdvInterface
             $rdvDTOs[] = new RdvDTO($rdv);
         }
         return $rdvDTOs;
+    }
+
+    public function getPraticienDispoByDate(\DateTimeImmutable $dateDeb, \DateTimeImmutable $dateFin): array
+    {
+        $praticiens = $this->praticienService->getAllPraticiens();
+        $rdvs = $this->rdvRepository->getPraticienDispoByDate($dateDeb, $dateFin);
+        $praticiensDispo = [];
+        foreach ($praticiens as $praticien) {
+            $dispo = true;
+            foreach ($rdvs as $rdv) {
+                if ($rdv->getPraticienId() === $praticien->getId()) {
+                    $dispo = false;
+                    break;
+                }
+            }
+            if ($dispo) {
+                $praticiensDispo[] = $praticien;
+            }
+        }
+        return $praticiensDispo;
     }
 }

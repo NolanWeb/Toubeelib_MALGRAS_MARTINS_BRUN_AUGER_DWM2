@@ -13,20 +13,24 @@ use toubeelib\core\dto\rdv\RdvDTO;
 class Rdv extends Entity
 {
     protected ?string $ID;
-    protected DateTimeImmutable $date;
+    protected \DateTimeInterface $date;
     protected int $duree;
     protected string $praticienId;
     protected string $patientId;
     protected string $specialite;
     protected string $statut;
+    protected string $lieu;
+    protected string $type;
 
-    public function __construct(DateTimeImmutable $date, int $duree, string $praticienId, string $patientId, string $specialite)
+    public function __construct(\DateTimeInterface $date, int $duree, string $praticienId, string $patientId, string $specialite, string $lieu, string $type)
     {
         $this->date = $date;
         $this->duree = $duree;
         $this->praticienId = $praticienId;
         $this->patientId = $patientId;
         $this->specialite = $specialite;
+        $this->lieu = $lieu;
+        $this->type = $type;
         $this->statut = "prévu";
     }
 
@@ -63,7 +67,7 @@ class Rdv extends Entity
         return $this->ID;
     }
 
-    public function getDate(): DateTimeImmutable
+    public function getDate(): \DateTimeInterface
     {
         return $this->date;
     }
@@ -86,6 +90,16 @@ class Rdv extends Entity
     public function getSpecialite(): String
     {
         return $this->specialite;
+    }
+
+    public function getLieu(): string
+    {
+        return $this->lieu;
+    }
+
+    public function getType(): string
+    {
+        return $this->type;
     }
 
     public function getStatut(): string

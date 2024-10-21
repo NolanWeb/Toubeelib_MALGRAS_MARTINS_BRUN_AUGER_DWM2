@@ -15,4 +15,5 @@ interface ServicePraticienInterface
     public function getAllPraticiens(): array;
     public function consultPraticien(string $praticienID): PraticienDTO;
 
+
 }

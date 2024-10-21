@@ -11,6 +11,7 @@ interface RdvRepositoryInterfaces
     public function deleteRdv(string $id): Rdv;
     public function getRdvsByPraticienId(string $praticienId): array;
     public function getRdvsByPraticienAndWeek(string $praticienId, string $week): array;
+    public function getAllRdvs(): array;
     public function getRdvsByPatientId(string $patientId): array;
 
 }
