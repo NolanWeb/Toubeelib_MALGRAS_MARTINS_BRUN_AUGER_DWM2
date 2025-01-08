@@ -14,7 +14,6 @@
 cache.properties
 .php_cs.cache
 /*.env
-/*.env.dist
 /app/config/config.ini
 # Composer
 composer.phar
